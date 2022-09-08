@@ -17,6 +17,7 @@ public class Soup extends JavaPlugin {
 
     public void registerListeners() {
         Bukkit.getServer().getPluginManager().registerEvents(new BasicListener(), this);
+
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new RefillListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new KitListener(), this);

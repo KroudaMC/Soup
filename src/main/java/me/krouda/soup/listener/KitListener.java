@@ -38,6 +38,7 @@ public class KitListener implements Listener {
                         inventory.setItem(2, new ItemStack(Material.IRON_LEGGINGS));
                         inventory.setItem(3, new ItemStack(Material.IRON_BOOTS));
                         inventory.setItem(4, new ItemStack(Material.DIAMOND_SWORD));
+                        inventory.setItem(5, new ItemStack(Material.BAKED_POTATO, 64));
                         player.openInventory(inventory);
 
                         cooldownListener.setCoolDown(player.getUniqueId(), COOLDOWN);

@@ -12,10 +12,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import static me.krouda.soup.listener.CooldownListener.COOLDOWN;
 
 public class RefillListener implements Listener {
