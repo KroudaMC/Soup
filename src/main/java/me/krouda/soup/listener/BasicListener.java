@@ -8,12 +8,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
@@ -108,5 +106,12 @@ public class BasicListener implements Listener {
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent e) {
+        Player player = e.getPlayer();
+        Location spawn = new Location(player.getLocation().getWorld(), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.X"), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.Y"), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.Z"), Soup.getInstance().getConfig().getInt("WORLD,SPAWN,YAW"), Soup.getInstance().getConfig().getInt("WORLD.SPAWN.PITCH"));
+        player.teleport(spawn);
     }
 }

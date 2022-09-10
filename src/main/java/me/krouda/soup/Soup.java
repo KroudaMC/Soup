@@ -2,6 +2,7 @@ package me.krouda.soup;
 
 import me.krouda.soup.cmds.SetSpawnCommand;
 import me.krouda.soup.cmds.SpawnCommand;
+import me.krouda.soup.combattag.listener.CombatTagListener;
 import me.krouda.soup.listener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,11 +23,11 @@ public class Soup extends JavaPlugin {
 
     public void registerListeners() {
         Bukkit.getServer().getPluginManager().registerEvents(new BasicListener(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new BasicListener(), this);
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new RefillListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new KitListener(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new CombatTagListener(), this);
     }
 
     public void registerCommands() {
