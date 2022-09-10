@@ -1,3 +1,8 @@
 name: Soup
 main: me.krouda.soup.Soup
 version: ${project.version}
+commands:
+  setspawn:
+    description: set spawn
+    usage: /setspawn
+    aliases: [spawnset, setlobby]
