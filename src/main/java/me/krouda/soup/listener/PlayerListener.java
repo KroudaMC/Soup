@@ -1,10 +1,7 @@
 package me.krouda.soup.listener;
 
 import me.krouda.soup.Soup;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,17 +13,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import static org.bukkit.Bukkit.getServer;
 
 public class PlayerListener implements Listener {
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.setJoinMessage(null);
         Player player = event.getPlayer();
-        Location spawn = new Location(null, 0.0D, 0.0D, 0.0D);
-        spawn.setWorld(getServer().getWorld(Soup.getInstance().getConfig().getString("WORLD")));
-        spawn.setX(Soup.getInstance().getConfig().getDouble("X"));
-        spawn.setY(Soup.getInstance().getConfig().getDouble("Y"));
-        spawn.setZ(Soup.getInstance().getConfig().getDouble("Z"));
-        spawn.setYaw(Soup.getInstance().getConfig().getInt("YAW"));
-        spawn.setPitch(Soup.getInstance().getConfig().getInt("PITCH"));
+        Location spawn = new Location(player.getLocation().getWorld(), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.X"), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.Y"), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.Z"), Soup.getInstance().getConfig().getInt("WORLD,SPAWN,YAW"), Soup.getInstance().getConfig().getInt("WORLD.SPAWN.PITCH"));
+        for (String key : Soup.getInstance().getConfig().getKeys(true)) {
+            Bukkit.getLogger().info(key);
+        }
         player.teleport(spawn);
     }
 
