@@ -1,38 +1,44 @@
 package me.krouda.soup.cmds;
 
 import me.krouda.soup.Soup;
-import me.krouda.soup.annotation.Command;
-import me.krouda.soup.annotation.Require;
-import me.krouda.soup.annotation.Sender;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 
-public class SetSpawnCommand implements SoupCommand {
+public class SetSpawnCommand implements CommandExecutor {
 
-    @Command(name = "", desc = "Set Spawn Location")
-    public void setSpawn(@Sender Player sender) {
-        if (sender.hasPermission("spawn.spawn")) {
-            Location location = sender.getLocation();
-            Soup.getInstance().getConfig().set("X", location.getX());
-            Soup.getInstance().getConfig().set("Y", location.getY());
-            Soup.getInstance().getConfig().set("Z", location.getZ());
-            Soup.getInstance().getConfig().set("YAW", location.getYaw());
-            Soup.getInstance().getConfig().set("PITCH", location.getPitch());
-
-            Soup.getInstance().saveDefaultConfig();
-            sender.sendMessage(ChatColor.GREEN + "Set spawned.");
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+        if (sender instanceof Player) {
+            FileConfiguration config = Soup.getInstance().getConfig();
+            Player player = (Player) sender;
+            Location l = player.getLocation();
+            String world = l.getWorld().getName();
+            double x = l.getX();
+            double y = l.getY();
+            double z = l.getZ();
+            float yaw = l.getYaw();
+            float pitch = l.getPitch();
+            config.set("WORLD.SPAWN.WORLD", world);
+            config.set("WORLD.SPAWN.X", x);
+            config.set("WORLD.SPAWN.Y", y);
+            config.set("WORLD.SPAWN.Z", z);
+            config.set("WORLD.SPAWN.YAW", yaw);
+            config.set("WORLD.SPAWN.PITCH", pitch);
+            Soup.getInstance().saveConfig();
+            Soup.getInstance().reloadConfig();
+            sender.sendMessage(ChatColor.GREEN + "Spawn point updated!");
         }
-    }
-
-    @Override
-    public String getCommandName() {
-        return "setspawn";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{"spawnset", "setlobby"};
+        else if(sender instanceof ConsoleCommandSender) {
+            sender.sendMessage("This is Player-Only command!");
+            return false;
+        }
+        return false;
     }
 }

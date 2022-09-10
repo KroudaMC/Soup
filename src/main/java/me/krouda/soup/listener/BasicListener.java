@@ -1,10 +1,10 @@
 package me.krouda.soup.listener;
 
 import me.krouda.soup.Soup;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntitySpawnEvent;
@@ -24,7 +24,6 @@ public class BasicListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.setJoinMessage(null);
     }
-
     @EventHandler
     public void onPlayerKick(PlayerKickEvent event) {
         event.setLeaveMessage(null);

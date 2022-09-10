@@ -1,16 +1,13 @@
 package me.krouda.soup;
 
 import me.krouda.soup.cmds.SetSpawnCommand;
-import me.krouda.soup.handler.CommandHandler;
 import me.krouda.soup.listener.*;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Soup extends JavaPlugin {
 
     private static Soup instance;
-    public CommandHandler commandHandler;
 
     @Override
     public void onEnable() {
@@ -24,6 +21,7 @@ public class Soup extends JavaPlugin {
 
     public void registerListeners() {
         Bukkit.getServer().getPluginManager().registerEvents(new BasicListener(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new BasicListener(), this);
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new RefillListener(), this);
@@ -31,7 +29,7 @@ public class Soup extends JavaPlugin {
     }
 
     public void registerCommands() {
-        commandHandler.registerCommands("setspawn");
+        getCommand("setspawn").setExecutor(new SetSpawnCommand());
     }
 
     @Override
