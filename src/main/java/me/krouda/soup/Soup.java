@@ -1,6 +1,7 @@
 package me.krouda.soup;
 
 import me.krouda.soup.cmds.SetSpawnCommand;
+import me.krouda.soup.cmds.SpawnCommand;
 import me.krouda.soup.listener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +31,7 @@ public class Soup extends JavaPlugin {
 
     public void registerCommands() {
         getCommand("setspawn").setExecutor(new SetSpawnCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
     }
 
     @Override

@@ -18,9 +18,6 @@ public class PlayerListener implements Listener {
         event.setJoinMessage(null);
         Player player = event.getPlayer();
         Location spawn = new Location(player.getLocation().getWorld(), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.X"), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.Y"), Soup.getInstance().getConfig().getDouble("WORLD.SPAWN.Z"), Soup.getInstance().getConfig().getInt("WORLD,SPAWN,YAW"), Soup.getInstance().getConfig().getInt("WORLD.SPAWN.PITCH"));
-        for (String key : Soup.getInstance().getConfig().getKeys(true)) {
-            Bukkit.getLogger().info(key);
-        }
         player.teleport(spawn);
     }
 
