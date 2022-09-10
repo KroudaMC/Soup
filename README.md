@@ -1,6 +1,6 @@
 # Soup
 
-Dogshit Soup PvP Plugin Made By Me.
+Dogshit and super simple Soup PvP plugin made by me
 
 # Previews
 
