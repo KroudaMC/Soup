@@ -13,19 +13,21 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import static org.bukkit.Bukkit.getServer;
+
 public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.setJoinMessage(null);
         Player player = event.getPlayer();
-        World world = (World) Soup.getInstance().getConfig().get("world");
-        Double x = Soup.getInstance().getConfig().getDouble("X");
-        Double y = Soup.getInstance().getConfig().getDouble("Y");
-        Double z = Soup.getInstance().getConfig().getDouble("Z");
-        Float yaw = (Float) Soup.getInstance().getConfig().get("YAW");
-        Float pitch = (Float) Soup.getInstance().getConfig().get("PITCH");
-        Location spawnLoc = new Location(world, x, y, z, yaw, pitch);
-        player.teleport(spawnLoc);
+        Location spawn = new Location(null, 0.0D, 0.0D, 0.0D);
+        spawn.setWorld(getServer().getWorld(Soup.getInstance().getConfig().getString("WORLD")));
+        spawn.setX(Soup.getInstance().getConfig().getDouble("X"));
+        spawn.setY(Soup.getInstance().getConfig().getDouble("Y"));
+        spawn.setZ(Soup.getInstance().getConfig().getDouble("Z"));
+        spawn.setYaw(Soup.getInstance().getConfig().getInt("YAW"));
+        spawn.setPitch(Soup.getInstance().getConfig().getInt("PITCH"));
+        player.teleport(spawn);
     }
 
     @EventHandler
