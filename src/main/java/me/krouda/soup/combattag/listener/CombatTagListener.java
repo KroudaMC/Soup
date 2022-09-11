@@ -40,11 +40,18 @@ public class CombatTagListener implements Listener {
         Player victim = (Player) e.getEntity();
         Player attacker = (Player) e.getDamager();
 
-        setCombatTag(victim.getUniqueId(), tagtimer);
-        setCombatTag(attacker.getUniqueId(), tagtimer);
+        int tagRemainAT = getCombatTag(attacker.getUniqueId());
+        int tagRemainVT = getCombatTag(victim.getUniqueId());
 
-        victim.sendMessage(ChatColor.RED + "You are not combat tagged!");
-        attacker.sendMessage(ChatColor.RED + "You are not combat tagged!");
+        if (tagRemainAT < 1) {
+            attacker.sendMessage(ChatColor.RED + "You are not combat tagged!");
+            setCombatTag(attacker.getUniqueId(), tagtimer);
+        }
+
+        if (tagRemainVT < 1) {
+            victim.sendMessage(ChatColor.RED + "You are not combat tagged!");
+            setCombatTag(victim.getUniqueId(), tagtimer);
+        }
     }
 
     @EventHandler
